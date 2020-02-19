@@ -25,6 +25,31 @@ class RecipientController {
       name,
     });
   }
+
+  async update(req, res) {
+    const schema = await Yup.object().shape({
+      name: Yup.string().required(),
+    });
+
+    if (!(await schema.isValid(req.body))) {
+      return res.status(401).json({ error: 'Validation Fail' });
+    }
+
+    const { id } = req.params;
+
+    const recipient = await Recipient.findByPk(id);
+
+    if (!recipient) {
+      return res.status(400).json({ error: 'User does not exists' });
+    }
+
+    const { name } = await recipient.update(req.body);
+
+    return res.json({
+      id,
+      name,
+    });
+  }
 }
 
 export default new RecipientController();

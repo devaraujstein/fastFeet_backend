@@ -12,15 +12,24 @@ const routes = new Router();
 
 routes.post('/session', SessionController.store);
 
+routes.get('/users', UserController.index);
 routes.post('/users', UserController.store);
 
 routes.use(authMiddleware);
+
+routes.put('/users', UserController.update);
+
 routes.use(authAdminMiddleware);
 
 routes.get('/recipients', RecipientController.index);
 routes.post('/recipients', RecipientController.store);
+routes.put('/recipients/:id', RecipientController.update);
 
 routes.get('/recipients/:recipient_id/addresses', AddressController.index);
 routes.post('/recipients/:recipient_id/addresses', AddressController.store);
+routes.put(
+  '/recipients/:recipient_id/addresses/:address_id',
+  AddressController.update
+);
 
 export default routes;
