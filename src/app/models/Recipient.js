@@ -14,9 +14,10 @@ class Recipient extends Model {
   }
 
   static associate(models) {
-    this.hasMany(models.Address, { as: 'address' });
-
-    return this;
+    this.hasMany(models.Address, {
+      foreignKey: 'recipient_id',
+      as: 'addresses',
+    });
   }
 }
 

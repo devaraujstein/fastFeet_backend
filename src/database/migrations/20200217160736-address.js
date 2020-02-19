@@ -1,18 +1,19 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('address', {
+    return queryInterface.createTable('addresses', {
       id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
       },
-      recipientId: {
+      recipient_id: {
         type: Sequelize.INTEGER,
         references: {
           model: 'recipients',
           key: 'id',
           onDelete: 'CASCADE',
+          onUpdate: 'CASCADE',
         },
         allowNull: false,
       },
@@ -36,7 +37,7 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      zipCode: {
+      zip_code: {
         type: Sequelize.STRING,
         allowNull: false,
       },
@@ -52,6 +53,6 @@ module.exports = {
   },
 
   down: queryInterface => {
-    return queryInterface.dropTable('address');
+    return queryInterface.dropTable('addresses');
   },
 };

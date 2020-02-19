@@ -9,7 +9,7 @@ class Address extends Model {
         complement: Sequelize.STRING,
         state: Sequelize.STRING,
         city: Sequelize.STRING,
-        zipCode: Sequelize.STRING,
+        zip_code: Sequelize.STRING,
       },
       { sequelize }
     );
@@ -18,10 +18,9 @@ class Address extends Model {
 
   static associate(models) {
     this.belongsTo(models.Recipient, {
-      foreignKey: 'recipientId',
-      as: 'recipient',
+      foreignKey: 'recipient_id',
+      as: 'recipients',
     });
-    return this;
   }
 }
 
