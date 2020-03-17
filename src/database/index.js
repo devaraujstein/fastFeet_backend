@@ -5,8 +5,10 @@ import databaseConfig from '../config/database';
 import User from '../app/models/User';
 import Recipient from '../app/models/Recipient';
 import Address from '../app/models/Address';
+import Deliveryman from '../app/models/Deliveryman';
+import File from '../app/models/File';
 
-const models = [User, Recipient, Address];
+const models = [User, Recipient, Address, Deliveryman, File];
 
 class Database {
   constructor() {
