@@ -11,6 +11,8 @@ import RecipientController from './app/controllers/RecipientController';
 import AddressController from './app/controllers/AddressController';
 import UserController from './app/controllers/UserController';
 import DeliverymanController from './app/controllers/DeliverymanController';
+import OrderController from './app/controllers/OrderController';
+
 import FileController from './app/controllers/FileController';
 
 const routes = new Router();
@@ -42,6 +44,8 @@ routes.get('/deliveryman', DeliverymanController.index);
 routes.post('/deliveryman', DeliverymanController.store);
 routes.put('/deliveryman/:id', DeliverymanController.update);
 routes.delete('/deliveryman/:id', DeliverymanController.delete);
+
+routes.post('/orders', OrderController.store);
 
 routes.post('/files', upload.single('file'), FileController.store);
 
