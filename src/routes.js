@@ -12,6 +12,8 @@ import AddressController from './app/controllers/AddressController';
 import UserController from './app/controllers/UserController';
 import DeliverymanController from './app/controllers/DeliverymanController';
 import OrderController from './app/controllers/OrderController';
+import DeliveriesAvailableController from './app/controllers/DeliveriesAvailableController';
+import DeliveriesMadeController from './app/controllers/DeliveriesMadeController';
 
 import FileController from './app/controllers/FileController';
 
@@ -44,6 +46,12 @@ routes.get('/deliveryman', DeliverymanController.index);
 routes.post('/deliveryman', DeliverymanController.store);
 routes.put('/deliveryman/:id', DeliverymanController.update);
 routes.delete('/deliveryman/:id', DeliverymanController.delete);
+
+routes.get('/deliveryman/:id/deliveries/', DeliveriesMadeController.index);
+routes.get(
+  '/deliveryman/:id/deliveries/available',
+  DeliveriesAvailableController.index
+);
 
 routes.get('/orders', OrderController.index);
 routes.post('/orders', OrderController.store);
