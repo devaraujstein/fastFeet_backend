@@ -5,6 +5,7 @@ import multerConfig from './config/multer';
 
 import authMiddleware from './app/middlewares/auth';
 import authAdminMiddleware from './app/middlewares/authAdmin';
+import withdrawalsMiddleware from './app/middlewares/withdrawals';
 
 import SessionController from './app/controllers/SessionController';
 import RecipientController from './app/controllers/RecipientController';
@@ -48,9 +49,15 @@ routes.put('/deliveryman/:id', DeliverymanController.update);
 routes.delete('/deliveryman/:id', DeliverymanController.delete);
 
 routes.get('/deliveryman/:id/deliveries/', DeliveriesMadeController.index);
+
 routes.get(
   '/deliveryman/:id/deliveries/available',
   DeliveriesAvailableController.index
+);
+routes.put(
+  '/deliveryman/:id/deliveries/available',
+  withdrawalsMiddleware,
+  DeliveriesAvailableController.update
 );
 
 routes.get('/orders', OrderController.index);
