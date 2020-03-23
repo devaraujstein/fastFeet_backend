@@ -15,6 +15,7 @@ import DeliverymanController from './app/controllers/DeliverymanController';
 import OrderController from './app/controllers/OrderController';
 import DeliveriesAvailableController from './app/controllers/DeliveriesAvailableController';
 import DeliveriesMadeController from './app/controllers/DeliveriesMadeController';
+import DeliveryProblemsController from './app/controllers/DeliveryProblemsController';
 
 import FileController from './app/controllers/FileController';
 
@@ -49,6 +50,10 @@ routes.put('/deliveryman/:id', DeliverymanController.update);
 routes.delete('/deliveryman/:id', DeliverymanController.delete);
 
 routes.get('/deliveryman/:id/deliveries/', DeliveriesMadeController.index);
+routes.put(
+  '/deliveryman/:id/deliveries/made/:order_id',
+  DeliveriesMadeController.update
+);
 
 routes.get(
   '/deliveryman/:id/deliveries/available',
@@ -56,7 +61,6 @@ routes.get(
 );
 routes.put(
   '/deliveryman/:id/deliveries/available',
-  withdrawalsMiddleware,
   DeliveriesAvailableController.update
 );
 
@@ -64,6 +68,13 @@ routes.get('/orders', OrderController.index);
 routes.post('/orders', OrderController.store);
 routes.put('/orders/:id', OrderController.update);
 routes.delete('/orders/:id', OrderController.delete);
+
+routes.get('/delivery/:id/problems', DeliveryProblemsController.index);
+routes.post('/delivery/:id/problems', DeliveryProblemsController.store);
+routes.delete(
+  '/problem/:id/cancel-delivery',
+  DeliveryProblemsController.delete
+);
 
 routes.post('/files', upload.single('file'), FileController.store);
 

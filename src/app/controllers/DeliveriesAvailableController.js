@@ -1,4 +1,6 @@
 import * as Yup from 'yup';
+import { Op } from 'sequelize';
+import { startOfDay, endOfDay } from 'date-fns';
 import Order from '../models/Order';
 import Recipient from '../models/Recipient';
 import Address from '../models/Address';
@@ -82,6 +84,20 @@ class DeliveriesAvailableController {
 
     order.start_date = start_date;
     order.end_date = end_date;
+
+    const WithdrawalsCount = await Order.findAndCountAll({
+      where: {
+        start_date: {
+          [Op.between]: [startOfDay(new Date()), endOfDay(new Date())],
+        },
+      },
+    });
+
+    if (start_date && WithdrawalsCount.count === 5) {
+      return res
+        .status(401)
+        .json({ error: 'the limit of start withdrawals reached' });
+    }
 
     await order.save();
 
