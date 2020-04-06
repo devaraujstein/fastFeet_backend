@@ -89,6 +89,10 @@ class DeliveriesMadeController {
         .json({ error: 'Order does not exist or was not directed at you' });
     }
 
+    if (orderExists.start_date === null) {
+      return res.status(401).json({ error: 'Delivery has not started' });
+    }
+
     orderExists.signature_id = signature_id;
     orderExists.end_date = subHours(new Date(), 3);
 
